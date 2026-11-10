@@ -1,0 +1,11 @@
+---
+interface Props {
+	badges: string[];
+}
+
+const { badges } = Astro.props;
+---
+
+<ul class="cs-badges" aria-label="Tech stack">
+	{badges.map((badge) => <li class="cs-badge">{badge}</li>)}
+</ul>

@@ -1,0 +1,215 @@
+/* Scoped styles for the coming-soon terminal page only.
+   Imported by src/pages/index.astro AFTER global.css, so these win. */
+
+.cs-page {
+	min-height: 100dvh;
+	margin: 0;
+	display: grid;
+	place-items: center;
+	padding: 2rem 1rem 3rem;
+	color: #c9d4e3;
+	background-color: #0a0e14;
+	background-image:
+		linear-gradient(rgba(56, 189, 248, 0.06) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(56, 189, 248, 0.06) 1px, transparent 1px);
+	background-size: 32px 32px;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.cs-wrap {
+	width: min(720px, 100%);
+	display: grid;
+	gap: 1rem;
+}
+
+.cs-eyebrow {
+	margin: 0;
+	font-size: 0.8rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: #5eead4;
+}
+
+.cs-terminal {
+	background: #0d1117;
+	border: 1px solid #212b36;
+	border-radius: 12px;
+	box-shadow:
+		0 24px 64px rgba(0, 0, 0, 0.55),
+		0 0 0 1px rgba(94, 234, 212, 0.06);
+	overflow: hidden;
+}
+
+.cs-bar {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.7rem 1rem;
+	background: #11161f;
+	border-bottom: 1px solid #212b36;
+}
+
+.cs-dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 999px;
+}
+
+.cs-dot--red { background: #ff5f57; }
+.cs-dot--yellow { background: #febc2e; }
+.cs-dot--green { background: #28c840; }
+
+.cs-title {
+	margin-left: 0.5rem;
+	font-size: 0.85rem;
+	color: #8b98ad;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cs-body {
+	padding: 1.25rem 1.25rem 1.5rem;
+}
+
+.cs-lines {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: 1rem;
+}
+
+.cs-input {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+	color: #e6edf3;
+}
+
+.cs-prompt {
+	color: #5eead4;
+	font-weight: 700;
+}
+
+.cs-out {
+	margin: 0.3rem 0 0;
+	color: #9fb0c3;
+	overflow-wrap: anywhere;
+}
+
+.cs-cursor {
+	display: inline-block;
+	width: 0.6em;
+	height: 1.15em;
+	vertical-align: text-bottom;
+	background: #5eead4;
+	animation: cs-blink 1.1s steps(1) infinite;
+}
+
+@keyframes cs-blink {
+	50% { opacity: 0; }
+}
+
+.cs-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 1.25rem;
+	padding-top: 1.25rem;
+	border-top: 1px dashed #26303d;
+}
+
+.cs-badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.cs-badge {
+	font-size: 0.75rem;
+	padding: 0.25rem 0.6rem;
+	border-radius: 999px;
+	border: 1px solid #2b3648;
+	color: #7dd3fc;
+	background: rgba(125, 211, 252, 0.08);
+	white-space: nowrap;
+}
+
+.cs-social {
+	display: flex;
+	gap: 0.6rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.cs-social a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	padding: 0.45rem 0.8rem;
+	border-radius: 8px;
+	border: 1px solid #2b3648;
+	color: #e6edf3;
+	font-size: 0.85rem;
+	text-decoration: none;
+	background: #131a24;
+}
+
+.cs-social a:hover {
+	border-color: #5eead4;
+	color: #5eead4;
+}
+
+.cs-social a:focus-visible {
+	outline: 2px solid #5eead4;
+	outline-offset: 2px;
+}
+
+.cs-social svg {
+	width: 16px;
+	height: 16px;
+	flex: none;
+}
+
+.cs-foot {
+	margin: 0;
+	font-size: 0.85rem;
+	color: #64748b;
+}
+
+.sr-only {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+	.cs-page {
+		padding: 1.25rem 0.75rem 2rem;
+	}
+	.cs-body {
+		padding: 1rem 1rem 1.25rem;
+		font-size: 0.9rem;
+	}
+	.cs-meta {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cs-cursor {
+		animation: none;
+	}
+}

@@ -1,0 +1,59 @@
+---
+import type { TermLine } from './coming-soon-content';
+
+interface Props {
+	lines: TermLine[];
+}
+
+const { lines } = Astro.props;
+---
+
+<ul class="cs-lines" data-terminal>
+	{
+		lines.map((line, i) => (
+			<li>
+				<div class="cs-input">
+					<span class="cs-prompt" aria-hidden="true">
+						{line.prompt}
+					</span>
+					<code data-cmd>{line.command}</code>
+					{i === lines.length - 1 && (
+						<span class="cs-cursor" aria-hidden="true" data-cursor />
+					)}
+				</div>
+				<p class="cs-out" data-out>
+					{line.output}
+				</p>
+			</li>
+		))
+	}
+</ul>
+
+<script>
+	const root = document.querySelector('[data-terminal]');
+	if (root && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		const cmds = Array.from(root.querySelectorAll('[data-cmd]'));
+		const outs = Array.from(root.querySelectorAll('[data-out]'));
+		const full = cmds.map((el) => el.textContent ?? '');
+		cmds.forEach((el) => (el.textContent = ''));
+		outs.forEach((el) => el instanceof HTMLElement && el.style.setProperty('opacity', '0'));
+		const typeOne = (el: Element, text: string) =>
+			new Promise<void>((resolve) => {
+				let i = 0;
+				const tick = () => {
+					i += 1;
+					el.textContent = text.slice(0, i);
+					if (i < text.length) window.setTimeout(tick, 34);
+					else resolve();
+				};
+				tick();
+			});
+		(async () => {
+			for (let k = 0; k < cmds.length; k++) {
+				await typeOne(cmds[k], full[k]);
+				outs[k] instanceof HTMLElement && outs[k].style.setProperty('opacity', '1');
+				await new Promise((r) => window.setTimeout(r, 220));
+			}
+		})();
+	}
+</script>
